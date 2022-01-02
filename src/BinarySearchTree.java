@@ -1,10 +1,10 @@
-public class BinarySearchTree {
-    Node root;
-    void insert(Node newNode){
+public class BinarySearchTree<T extends Comparable<T>> {
+    Node<T> root;
+    void insert(Node<T> newNode){
         if (root==null)
             root = newNode;
         else{
-            Node tmp = root;
+            Node<T> tmp = root;
             int comp;
             while (true){
                 comp = compareNode(newNode , tmp);
@@ -32,10 +32,10 @@ public class BinarySearchTree {
             }
         }
     }
-    private int compareNode(Node a , Node b){
-        return Integer.compare(a.getData(), b.getData());
+    private int compareNode(Node<T> a , Node<T> b){
+        return a.getData().compareTo(b.getData());
     }
-    void inorderTraversal(Node t){
+    void inorderTraversal(Node<T> t){
         if (t!=null){
             inorderTraversal(t.left);
             System.out.println(t.getData());
@@ -45,7 +45,7 @@ public class BinarySearchTree {
     void inorderTraversal(){
         inorderTraversal(root);
     }
-    void preorderTraversal(Node t){
+    void preorderTraversal(Node<T> t){
         if (t!=null){
             System.out.println(t.getData());
             preorderTraversal(t.left);
@@ -55,7 +55,7 @@ public class BinarySearchTree {
     void preorderTraversal(){
         preorderTraversal(root);
     }
-    void postorderTraversal(Node t){
+    void postorderTraversal(Node<T> t){
         if (t!=null){
             postorderTraversal(t.left);
             postorderTraversal(t.right);
@@ -65,7 +65,7 @@ public class BinarySearchTree {
     void postorderTraversal(){
         postorderTraversal(root);
     }
-    public int getHeight(Node t) {
+    public int getHeight(Node<T> t) {
         if(t==null)
             return -1;
         return Math.max(getHeight(t.right) , getHeight(t.left))+1;
@@ -73,30 +73,30 @@ public class BinarySearchTree {
     public int getHeight() {
         return getHeight(root);
     }
-    Node inorderSearch(Node t, int key){
+    Node<T> inorderSearch(Node<T> t, T key){
       if(t==null || t.getData() == key)
         return t;
-      if (t.getData() < key){
+      if (t.getData().compareTo(key) < 0){
           return inorderSearch(t.right , key);
       }
       else{
           return inorderSearch(t.left , key);
       }
     }
-    Node inorderSearch(int key){
+    Node<T> inorderSearch(T key){
         return inorderSearch(root , key);
     }
-    Node mirror(Node t){
+    Node<T> mirror(Node<T> t){
         if (t == null)
             return t;
 
-        Node left = mirror(t.left);
-        Node right = mirror(t.right);
+        Node<T> left = mirror(t.left);
+        Node<T> right = mirror(t.right);
         t.left = right;
         t.right = left;
         return t;
     }
-    Node mirror(){
+    Node<T> mirror(){
         return mirror(root);
     }
 

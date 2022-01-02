@@ -1,21 +1,12 @@
-public class Node {
-    private int data;
-    public Node right,left;
-    public Node(int data){
+public class Node <T>{
+    private T data;
+    public Node<T> right,left;
+    public Node(T data){
         this.data = data;
         left=null;
         right=null;
     }
-    public int getData(){
+    public T getData(){
         return data;
-    }
-    @Override
-    public Node clone(){
-        Node n = new Node(this.data);
-        if (this.right!=null)
-            n.right = this.right.clone();
-        if (this.left!=null)
-            n.left = this.left.clone();
-        return n;
     }
 }
