@@ -97,8 +97,7 @@ public class BinarySearchTree {
         return t;
     }
     Node mirror(){
-        Node r = root.clone();
-        return mirror(r);
+        return mirror(root);
     }
 
 }
